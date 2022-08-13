@@ -1,4 +1,3 @@
-#define TCLEN 32
 
 // Set the CPU's internal state to these values before starting the test
 #define B_PCH 0
@@ -20,3 +19,5 @@
 // Any time your emulated CPU reads a value, supply the values from this locus on.
 #define PROG  14
 
+// The highest number of reads a single instruction can do is 8.
+#define TCLEN (PROG+8)
