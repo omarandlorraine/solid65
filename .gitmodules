@@ -1,3 +1,6 @@
 [submodule "perfect6502/perfect6502"]
 	path = perfect6502/perfect6502
 	url = git@github.com:omarandlorraine/perfect6502.git
+[submodule "gianlucag/mos6502"]
+	path = gianlucag/mos6502
+	url = git@github.com:gianlucag/mos6502.git
