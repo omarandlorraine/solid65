@@ -1,5 +1,5 @@
 
-#include "mos6502.h"
+#include "mos6502/mos6502.h"
 #include "../solid65.h"
 
 using namespace std;

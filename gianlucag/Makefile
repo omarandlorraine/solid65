@@ -1,16 +1,16 @@
 CC=g++
-CFLAGS=-g -Wall -Werror -pedantic
+CFLAGS=-g -Wall -Wextra -pedantic
 SOURCES=test.cpp mos6502.cpp
 BUILD_DIR=build/
 OBJECTS=$(SOURCES:%.cpp=$(BUILD_DIR)%.o)
 
 default: test
 
-mos6502.cpp: mos6502.h mos6502/mos6502.cpp
+mos6502.h: mos6502/mos6502.h
 	cp $< $@
 
-mos6502.h: mos6502/mos6502.h
-	cp $^ $@
+mos6502.cpp: mos6502/mos6502.cpp mos6502.h
+	cp $< $@
 
 $(OBJECTS): $(BUILD_DIR)%.o:%.cpp
 	@mkdir -p build/
@@ -29,4 +29,4 @@ cppcheck: mos6502.cpp
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR) test
+	rm -rf $(BUILD_DIR) test mos6502.cpp mos6502.h
