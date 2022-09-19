@@ -30,16 +30,21 @@ void write(uint16_t addr, uint8_t val) {
 
 uint8_t read(uint16_t addr) {
 	static int read_count = -2;
+	uint8_t val;
 	switch (read_count) {
 		case -2:
 			read_count++;
-			return testcase[B_PCL];
+			val = testcase[B_PCL];
+			log('r', addr, val);
+			return val;
 		case -1:
 			read_count++;
-			return testcase[B_PCH];
+			val = testcase[B_PCH];
+			log('r', addr, val);
+			return val;
 		default:
 			read_count++;
-			uint8_t val = testcase[PROG + read_count++];
+			val = testcase[PROG + read_count++];
 			log('r', addr, val);
 			return val;
 	}
