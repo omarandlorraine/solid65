@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# build the software
+make
+make -C rubbermallet
+make -C gianlucag
+
+# Generate one random test case
+TESTCASE="$(./generate_test_case)"
+
+# Create a folder to store the test case and its results in
+TESTDIR=tests/"$TESTCASE"
+mkdir -p "$TESTDIR"
+
+# Print the test case
+echo $TESTCASE
+
+# and store it.
+echo $TESTCASE > "$TESTDIR"/input
+
+# run the test case on each emulator
+for TESTER in rubbermallet gianlucag
+do
+	$TESTER/test $TESTCASE > "$TESTDIR"/$TESTER.results
+done
+
+# Check the output of the emulators
+for i in rubbermallet gianlucag
+do
+	for j in rubbermallet gianlucag
+	do
+		diff "$TESTDIR"/"$i".results "$TESTDIR"/"$j".results || \
+			echo $i and $j don\'t agree
+	done
+done
