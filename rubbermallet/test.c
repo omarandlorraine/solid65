@@ -37,12 +37,10 @@ uint8_t read6502(uint16_t addr) {
         case -2:
             read_count++;
             val = testcase[B_PCL];
-            log('r', addr, val);
             return val;
         case -1:
             read_count++;
             val = testcase[B_PCH];
-            log('r', addr, val);
             return val;
         default:
             read_count++;
