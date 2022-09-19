@@ -2,11 +2,11 @@ CC=gcc
 CFLAGS=-g -Wall -Wextra -pedantic
 SOURCES=test.c fake6502.c
 BUILD_DIR=build/
-OBJECTS=$(SOURCES:%.cpp=$(BUILD_DIR)%.o)
+OBJECTS=$(SOURCES:%.c=$(BUILD_DIR)%.o)
 
 default: test
 
-$(OBJECTS): $(BUILD_DIR)%.o:%.cpp
+$(OBJECTS): $(BUILD_DIR)%.o:%.c
 	@mkdir -p build/
 	$(CC) -c $(CFLAGS) -o $@ $^
 
