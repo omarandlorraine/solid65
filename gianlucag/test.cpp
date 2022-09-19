@@ -34,13 +34,11 @@ uint8_t read(uint16_t addr) {
 	switch (read_count) {
 		case -2:
 			read_count++;
-			val = testcase[B_PCL];
-			log('r', addr, val);
+			val = testcase[B_PCH];
 			return val;
 		case -1:
 			read_count++;
-			val = testcase[B_PCH];
-			log('r', addr, val);
+			val = testcase[B_PCL];
 			return val;
 		default:
 			read_count++;
