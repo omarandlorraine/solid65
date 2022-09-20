@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# build the software
-make
-make -C rubbermallet
-make -C gianlucag
-
 # Generate one random test case
 TESTCASE="$(./generate_test_case)"
 
@@ -25,16 +20,8 @@ do
 done
 
 # Check the output of the emulators
-for i in rubbermallet gianlucag
+for i in bus internal_state
 do
-	for j in rubbermallet gianlucag
-	do
-		if diff "$TESTDIR"/"$i".results "$TESTDIR"/"$j".results > /dev/null ;
-		then
-			echo okay
-		else
-			echo $i and $j don\'t agree && \
-			exit 1
-		fi
-	done
+	echo $i
+	./$i $"TESTDIR" gianlucag rubbermallet
 done
