@@ -18,7 +18,7 @@ void log(char rw, uint16_t addr, uint8_t val) {
 	printf("%02x ", cpu.GetX());
 	printf("%02x ", cpu.GetY());
 	printf("%02x ", cpu.GetS());
-	printf("%02x ", cpu.GetP() & 0xdf);
+	printf("%02x ", cpu.GetP() & 0xcf);
 	printf("%04x ", cpu.GetPC());
 	printf("\n");
 	cycles++;

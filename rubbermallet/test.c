@@ -20,7 +20,7 @@ void log(char rw, uint16_t addr, uint8_t val) {
     printf("%02x ", x);
     printf("%02x ", y);
     printf("%02x ", sp);
-    printf("%02x ", status & 0xdf);
+    printf("%02x ", status & 0xcf);
     printf("%04x ", pc);
     printf("\n");
     cycles++;
