@@ -29,7 +29,12 @@ for i in rubbermallet gianlucag
 do
 	for j in rubbermallet gianlucag
 	do
-		diff "$TESTDIR"/"$i".results "$TESTDIR"/"$j".results || \
-			echo $i and $j don\'t agree
+		if diff "$TESTDIR"/"$i".results "$TESTDIR"/"$j".results > /dev/null ;
+		then
+			echo okay
+		else
+			echo $i and $j don\'t agree && \
+			exit 1
+		fi
 	done
 done
