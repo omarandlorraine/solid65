@@ -11,15 +11,9 @@
 #include "solid65.h"
 #include "opcodes.h"
 
-int valid_opcode(char opcode) {
-	// This can be improved.
-	// (binary search would be much quicker since we know the array is sorted)
-	// Also it would be better not to depend on the size of the array
-	for(int i = 0; i < 152; i++) {
-		if(opcode == legals[i]) return 1;
-		if(opcode > legals[i]) return 0;
-	}
-	return 0;
+int valid_opcode(int opcode) {
+	opcode %= (sizeof(legals) / sizeof(legals[0]));
+	return legals[opcode];
 }
 
 int main() {
@@ -39,9 +33,7 @@ int main() {
 	}
 
 	// Make sure that the opcode is a valid one
-	while(valid_opcode(testcase[PROG])) {
-		testcase[PROG] = fgetc(rng);
-	}
+	testcase[PROG] = valid_opcode(fgetc(rng));
 
 	// This program doesn't make any claims about what the result should be, so
 	// clear out the result fields
