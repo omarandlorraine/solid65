@@ -17,8 +17,10 @@ echo $TESTCASE
 # and store it.
 echo $TESTCASE > "$TESTDIR"/input
 
+EMUS="rubbermallet gianlucag"
+
 # run the test case on each emulator
-for TESTER in rubbermallet gianlucag
+for TESTER in $EMUS
 do
 	$TESTER/test $TESTCASE > "$TESTDIR"/$TESTER.results
 done
@@ -27,5 +29,5 @@ done
 for i in bus internal_state
 do
 	echo $i
-	./$i $"TESTDIR" gianlucag rubbermallet
+	./$i $"TESTDIR" $EMUS
 done
