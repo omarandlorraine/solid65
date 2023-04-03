@@ -1,6 +1,6 @@
-[submodule "gianlucag/mos6502"]
-	path = gianlucag/mos6502
-	url = git@github.com:gianlucag/mos6502.git
 [submodule "MyLittle6502/MyLittle6502"]
 	path = MyLittle6502/MyLittle6502
 	url = git@github.com:C-Chads/MyLittle6502.git
+[submodule "gianlucag/mos6502"]
+	path = gianlucag/mos6502
+	url = https://github.com/gianlucag/mos6502.git
