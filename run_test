@@ -1,5 +1,9 @@
 #!/bin/bash
 
+make
+make -C rubbermallet
+make -C gianlucag
+
 # Generate one random test case
 TESTCASE="$(./generate_test_case)"
 
