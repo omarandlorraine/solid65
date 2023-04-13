@@ -63,6 +63,7 @@ int main(int argc, char *argv[]) {
     x = (testcase[B_X]);
     y = (testcase[B_Y]);
     sp = (testcase[B_S]);
+    log('b', 0, 0);
 	step6502();
     log('a', 0, 0);
 }
