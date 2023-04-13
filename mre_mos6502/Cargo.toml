@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 hex = "0.4.3"
-mos6502 = {git="http://github.com/mre/mos6502.git"}
+mos6502 = {git="http://github.com/mre/mos6502.git", branch="rts"}
