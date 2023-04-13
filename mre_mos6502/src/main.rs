@@ -42,7 +42,7 @@ fn main() {
     mos6502.registers.index_x = args[2];
     mos6502.registers.index_y = args[3];
     mos6502.registers.stack_pointer = StackPointer(args[5]);
-    mos6502.registers.program_counter = args[0].into();
+    mos6502.registers.program_counter = Into::<u16>::into(args[0]);
 
     // TODO: Once this is confirmed working, we can remove the FIXME notice in the library's implementation
     // of the PHP opcode.
