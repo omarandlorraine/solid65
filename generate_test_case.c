@@ -35,16 +35,6 @@ int main() {
 	// Make sure that the opcode is a valid one
 	testcase[PROG] = valid_opcode(fgetc(rng));
 
-	// This program doesn't make any claims about what the result should be, so
-	// clear out the result fields
-	testcase[A_PCH] = 0;
-	testcase[A_PCL] = 0;
-	testcase[A_A] = 0;
-	testcase[A_X] = 0;
-	testcase[A_Y] = 0;
-	testcase[A_P] = 0;
-	testcase[A_S] = 0;
-
 	// close the RNG
 	fclose(rng);
 

@@ -36,7 +36,7 @@ impl Bus for Memory {
 
 fn main() {
     let args: Vec<_> = std::env::args().into_iter().skip(1).map(|string| u8::from_str_radix(&string, 16).unwrap()).collect();
-    let memory = Memory::new(args[14..].into());
+    let memory = Memory::new(args[7..].into());
     let mut mos6502 = cpu::CPU::new(memory);
     mos6502.registers.accumulator = args[1] as i8;
     mos6502.registers.index_x = args[2];
