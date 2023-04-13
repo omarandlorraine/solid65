@@ -14,3 +14,12 @@ Known issues with the tester:
 ## fake6502
 
 [link to sourcefile](http://rubbermallet.org/fake6502.c)
+
+## mos6502
+
+An emulator written in Rust.
+
+Known issues with the tester:
+- It does not log the internal state of the CPU with each bus cycle.
+
+[link to repository](https://github.com/mre/mos6502)

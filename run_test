@@ -1,8 +1,6 @@
 #!/bin/bash
 
 make
-make -C rubbermallet
-make -C gianlucag
 
 # Generate one random test case
 TESTCASE="$(./generate_test_case)"
@@ -17,12 +15,12 @@ echo $TESTCASE
 # and store it.
 echo $TESTCASE > "$TESTDIR"/input
 
-EMUS="rubbermallet gianlucag"
+EMUS="rubbermallet gianlucag mre_mos6502"
 
 # run the test case on each emulator
 for TESTER in $EMUS
 do
-	$TESTER/test $TESTCASE > "$TESTDIR"/$TESTER.results
+	(cd $TESTER; ./test $TESTCASE > ../"$TESTDIR"/$TESTER.results)
 done
 
 # Check the output of the emulators
