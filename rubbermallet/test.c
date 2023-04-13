@@ -15,13 +15,13 @@ extern uint8_t status;
 void log(char rw, uint16_t addr, uint8_t val) {
     static int cycles = 0;
     printf("%c %u ", rw, cycles);
-    printf("%04x %02x ", addr, val);
-    printf("%02x ", a);
-    printf("%02x ", x);
-    printf("%02x ", y);
-    printf("%02x ", sp);
-    printf("%02x ", status & 0xcf);
-    printf("%04x ", pc);
+    printf("0x%04x 0x%02x ", addr, val);
+    printf("0x%02x ", a);
+    printf("0x%02x ", x);
+    printf("0x%02x ", y);
+    printf("0x%02x ", sp);
+    printf("0x%02x ", status & 0xcf);
+    printf("0x%04x ", pc);
     printf("\n");
     cycles++;
 }

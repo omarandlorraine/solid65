@@ -13,13 +13,13 @@ mos6502 cpu = mos6502(read, write);
 void log(char rw, uint16_t addr, uint8_t val) {
 	static int cycles = 0;
 	printf("%c %u ", rw, cycles);
-	printf("%04x %02x ", addr, val);
-	printf("%02x ", cpu.GetA());
-	printf("%02x ", cpu.GetX());
-	printf("%02x ", cpu.GetY());
-	printf("%02x ", cpu.GetS());
-	printf("%02x ", cpu.GetP() & 0xcf);
-	printf("%04x ", cpu.GetPC());
+	printf("0x%04x 0x%02x ", addr, val);
+	printf("0x%02x ", cpu.GetA());
+	printf("0x%02x ", cpu.GetX());
+	printf("0x%02x ", cpu.GetY());
+	printf("0x%02x ", cpu.GetS());
+	printf("0x%02x ", cpu.GetP() & 0xcf);
+	printf("0x%04x ", cpu.GetPC());
 	printf("\n");
 	cycles++;
 }
