@@ -2,3 +2,4 @@ generate_test_case
 rubbermallet/build
 rubbermallet/test
 mre_mos6502/target
+mre_mos6502/Cargo.lock
