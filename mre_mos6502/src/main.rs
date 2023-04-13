@@ -23,13 +23,13 @@ impl Memory {
 impl Bus for Memory {
     fn get_byte(&mut self, addr: u16) -> u8 {
         let r = self.vals[self.counter];
-        println!("r {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter, addr, r);
+        println!("r {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter / 2, addr, r);
         self.counter += 2;
         return r;
     }
 
     fn set_byte(&mut self, addr: u16, r: u8) {
-        println!("w {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter, addr, r);
+        println!("w {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter / 2, addr, r);
         self.counter += 2;
     }
 }
