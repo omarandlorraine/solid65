@@ -15,17 +15,4 @@ echo $TESTCASE
 # and store it.
 echo $TESTCASE > "$TESTDIR"/input
 
-EMUS="rubbermallet gianlucag mre_mos6502"
-
-# run the test case on each emulator
-for TESTER in $EMUS
-do
-	(cd $TESTER; ./test $TESTCASE > ../"$TESTDIR"/$TESTER.results)
-done
-
-# Check the output of the emulators
-for i in bus internal_state
-do
-	echo $i
-	./$i $"TESTDIR" $EMUS
-done
+./rerun "$TESTDIR"
