@@ -22,21 +22,22 @@ impl Memory {
 
 impl Bus for Memory {
     fn get_byte(&mut self, addr: u16) -> u8 {
-        let r = self.vals[self.counter];
-        println!("r {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", (self.counter / 2) + 1, addr, r);
-        self.counter += 2;
+        let a = addr & 0x07;
+        let r = self.vals[a as usize];
+        self.counter += 1;
+        println!("r {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter, addr, r);
         return r;
     }
 
     fn set_byte(&mut self, addr: u16, r: u8) {
-        println!("w {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", (self.counter / 2) + 1, addr, r);
-        self.counter += 2;
+        self.counter += 1;
+        println!("w {} {:#06x} {:#04x} 0x00 0x00 0x00 0x00 0x00 0x0000", self.counter, addr, r);
     }
 }
 
 fn main() {
     let args: Vec<_> = std::env::args().into_iter().skip(1).map(|string| u8::from_str_radix(&string, 16).unwrap()).collect();
-    let memory = Memory::new(args[7..].into());
+    let memory = Memory::new(args[6..].into());
     let mut mos6502 = cpu::CPU::new(memory);
     mos6502.registers.accumulator = args[1] as i8;
     mos6502.registers.index_x = args[2];
@@ -50,6 +51,6 @@ fn main() {
     println!("b {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.memory.counter, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter);
     mos6502.single_step();
 
-    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", (mos6502.memory.counter / 2) + 1, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter)
+    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.memory.counter, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter)
     
 }

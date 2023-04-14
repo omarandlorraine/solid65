@@ -42,7 +42,7 @@ uint8_t read(uint16_t addr) {
 			return val;
 		default:
 			read_count++;
-			val = testcase[PROG + read_count++];
+			val = testcase[PROG + (addr & 0x07)];
 			log('r', addr, val);
 			return val;
 	}
