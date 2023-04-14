@@ -10,6 +10,9 @@ class Cycle:
             print("Couldn't unpack " + str(fields))
 
         self.cycle_number = int(cycle_number)
+
+    def internal_state(self):
+        return (self.a, self.x, self.y, self.sp, self.status, self.pc)
 		
 class Cycles:
     def __init__(self, filename, file):
@@ -30,10 +33,26 @@ class Cycles:
     def addresses(self):
         return [c.addr_bus for c in self.cycles]
 
+    def before(self):
+        return self.cycles[0]
+
+    def after(self):
+        return self.cycles[-1]
+
 file_a = sys.argv[1] + sys.argv[2] + ".results"
 file_b = sys.argv[1] + sys.argv[3] + ".results"
 
 def test(a, b):
+    if a.before().internal_state() != b.before().internal_state():
+        print("The initial states differ; not bothering to test anything else")
+        sys.exit(-1)
+
+    for reg in zip(("a", "x", "y", "stack pointer", "flags", "pc"),  a.after().internal_state(), b.after().internal_state()):
+        if reg[1] != reg[2]:
+            print("The instruction results in a different %s; this is a bug" % reg[0])
+            print(reg)
+            sys.exit(-2)
+
     for cyc in [a, b]:
         if cyc.check_monotonic_cycle_count_increment():
             print("%s does not have monotonically increasing cycle counts, (see column 2)." % cyc.filename)
