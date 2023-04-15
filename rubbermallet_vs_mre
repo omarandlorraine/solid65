@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# This script searches for a test case that rubbermallet and mre don't agree on.
+# The compare.py script's exit code is examines and if greater than 6 (i.e. not counting difference in cycle count or internal state)
+# the loop terminates and you're left to figure out what's wrong
+
+make
+
+while true
+do
+
+	# Generate one random test case
+	TESTCASE="$(./generate_test_case)"
+
+	# Create a folder to store the test case and its results in
+	TESTDIR=tests/"$TESTCASE"
+	mkdir -p "$TESTDIR"
+
+	# Print the test case
+	echo $TESTCASE
+
+	# and store it.
+	echo $TESTCASE > "$TESTDIR"/input
+
+	./rerun "$TESTDIR"
+	./compare.py "$TESTDIR"/ rubbermallet mre_mos6502
+	if [ $? -gt 6 ]
+	then
+		exit
+	fi
+done
