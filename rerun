@@ -1,9 +1,9 @@
 #!/bin/bash
 
-make
-make -C rubbermallet
-make -C gianlucag
-(cd mre_mos6502; cargo update)
+make --quiet
+make --quiet -C rubbermallet
+make --quiet -C gianlucag
+#(cd mre_mos6502; cargo update)
 
 EMUS="rubbermallet gianlucag mre_mos6502"
 
