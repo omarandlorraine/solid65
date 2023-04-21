@@ -33,7 +33,8 @@ int main() {
 	}
 
 	// Make sure that the opcode is a valid one
-	testcase[PROG] = valid_opcode(fgetc(rng));
+	testcase[B_PCH] &= 0xf8;
+	testcase[PROG - 1] = valid_opcode(fgetc(rng));
 
 	// close the RNG
 	fclose(rng);
