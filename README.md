@@ -39,7 +39,18 @@ emulator compares with mre's in their execution of the RTS instruction:
 ./compare.py tests/rts/ rubbermallet mre_mos6502
 ```
 
+The exit status of the `compare.py` script corresponds to the severity of the
+mismatch; 6 or lower is good if cycle accuracy is not important.
 
+These two steps with `./run_test` and `./compare.py blah de blah` may of course be
+tedious, and may not even find a bug. So, a convenience script comparing two
+emulators exists:
+
+```
+./rubbermallet_vs_mre    # searches for discrepancies between fake6502 and mre_mos6502, not considering cycle accuracy
+```
+
+----
 ### gianluca/mos6502
 
 [link to repository](https://github.com/gianlucag/mos6502)
@@ -47,10 +58,12 @@ emulator compares with mre's in their execution of the RTS instruction:
 Known issues with the tester:
 - It doesn't check that the number of cycles matches the number of reads and writes
 
+----
 ### fake6502
 
 [link to sourcefile](http://rubbermallet.org/fake6502.c)
 
+----
 ### mos6502
 
 An emulator written in Rust.
