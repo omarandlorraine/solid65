@@ -63,6 +63,6 @@ fn main() {
         mos6502.cycle(&mut memory);
     }
 
-    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.tcu(),  mos6502.a(), mos6502.x(), mos6502.y(), mos6502.s() & 0xff, mos6502.p() & 0xcf, mos6502.pc());
+    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", memory.counter,  mos6502.a(), mos6502.x(), mos6502.y(), mos6502.s() & 0xff, mos6502.p() & 0xcf, mos6502.pc());
     
 }
