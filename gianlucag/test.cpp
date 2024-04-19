@@ -54,7 +54,6 @@ int main(int argc, char *argv[]) {
 	for(int i = 1; i < TCLEN; i++) {
 		testcase[i] = strtoul(argv[i], NULL, 16);
 	}
-	log('b', 0, 0);
 
 	cpu.SetResetP(testcase[B_P]);
 	cpu.SetResetA(testcase[B_A]);
@@ -62,6 +61,7 @@ int main(int argc, char *argv[]) {
 	cpu.SetResetY(testcase[B_Y]);
 	cpu.SetResetS(testcase[B_S]);
 	cpu.Reset();
+	log('b', 0, 0);
 	cpu.Run(1, cycles);
 	log('a', 0, 0);
 }
