@@ -38,8 +38,8 @@ impl Bus for Memory {
 fn main() {
     let args: Vec<_> = std::env::args().into_iter().skip(1).map(|string| u8::from_str_radix(&string, 16).unwrap()).collect();
     let memory = Memory::new(args[6..].into());
-    let mut mos6502 = cpu::CPU::new(memory);
-    mos6502.registers.accumulator = args[1] as i8;
+    let mut mos6502 = cpu::CPU::new(memory, mos6502::instruction::Nmos6502);
+    mos6502.registers.accumulator = args[1];
     mos6502.registers.index_x = args[2];
     mos6502.registers.index_y = args[3];
     mos6502.registers.stack_pointer = StackPointer(args[5]);
@@ -51,6 +51,6 @@ fn main() {
     println!("b {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.memory.counter, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter);
     mos6502.single_step();
 
-    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.memory.counter, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter)
+    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", mos6502.memory.counter + 1, mos6502.registers.accumulator, mos6502.registers.index_x, mos6502.registers.index_y, mos6502.registers.stack_pointer.0, mos6502.registers.status.bits() & 0xcf, mos6502.registers.program_counter)
     
 }
