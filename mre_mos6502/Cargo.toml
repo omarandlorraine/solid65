@@ -3,8 +3,19 @@ name = "mre_mos6502"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = []
+cmos = []
+
+[[bin]]
+name = "mre_mos6502"
+path = "src/main.rs"
+
+[[bin]]
+name = "cmos"
+path = "src/main.rs"
+required_features = ["cmos"]
 
 [dependencies]
 hex = "0.4.3"
-mos6502 = "0.5.0"
+mos6502 = { path = "./mos6502" }

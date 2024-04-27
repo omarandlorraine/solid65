@@ -38,6 +38,9 @@ impl Bus for Memory {
 fn main() {
     let args: Vec<_> = std::env::args().into_iter().skip(1).map(|string| u8::from_str_radix(&string, 16).unwrap()).collect();
     let memory = Memory::new(args[6..].into());
+    #[cfg(feature = "cmos")]
+    let mut mos6502 = cpu::CPU::new(memory, mos6502::instruction::Cmos6502);
+    #[cfg(not(feature = "cmos"))]
     let mut mos6502 = cpu::CPU::new(memory, mos6502::instruction::Nmos6502);
     mos6502.registers.accumulator = args[1];
     mos6502.registers.index_x = args[2];

@@ -52,16 +52,16 @@ fn main() {
     cpu.set_a( args[1]);
     cpu.set_x( args[2]);
     cpu.set_y( args[3]);
-    cpu.set_s(args[5]);
     cpu.set_pc( Into::<u16>::into(args[0]));
 
     // TODO: Once this is confirmed working, we can remove the FIXME notice in the library's implementation
     // of the PHP opcode.
-    cpu.set_p(args[4].into());
-    println!("b {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", memory.counter, cpu.get_a(), cpu.get_x(), cpu.get_y(), cpu.get_s(), cpu.get_p(), cpu.get_pc());
     cpu.step(&mut Dummy); // let the CPU reset; this does not log anything.
+    cpu.set_p(args[4].into());
+    cpu.set_s(args[5]);
     cpu.set_pc(Into::<u16>::into(args[0]));
+    println!("b {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", memory.counter, cpu.get_a(), cpu.get_x(), cpu.get_y(), cpu.get_s(), cpu.get_p() & 0xcf, cpu.get_pc());
     cpu.step(&mut memory);
 
-    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", memory.counter, cpu.get_a(), cpu.get_x(), cpu.get_y(), cpu.get_s(), cpu.get_p(), cpu.get_pc());
+    println!("a {} 0x0000 0x00 {:#04x} {:#04x} {:#04x} {:#04x} {:#04x} {:#06x}", memory.counter + 1, cpu.get_a(), cpu.get_x(), cpu.get_y(), cpu.get_s(), cpu.get_p() & 0xcf, cpu.get_pc());
 }
